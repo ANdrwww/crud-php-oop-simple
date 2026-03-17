@@ -11,14 +11,14 @@
     /* ─── RESET ────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ─── TOKENS (update these when Figma files arrive) ─────────── */
+    /* ─── TOKENS (from Figma: Menu Elements export) ─────────────── */
     :root {
-      --color-primary:       #1B4FD8;
-      --color-primary-dark:  #0F3399;
-      --color-primary-light: #EBF0FF;
-      --color-secondary:     #00B4D8;
+      --color-primary:       #E3001B;
+      --color-primary-dark:  #B50016;
+      --color-primary-light: #FFEAED;
+      --color-secondary:     #FF4D63;
       --color-accent:        #F59E0B;
-      --color-navy:          #0A1628;
+      --color-nav-bg:        #3D3D3D;
       --color-success:       #22C55E;
       --color-warning:       #F59E0B;
       --color-error:         #EF4444;
@@ -28,11 +28,13 @@
       --color-neutral-800:   #1F2937;
       --color-neutral-700:   #374151;
       --color-neutral-500:   #6B7280;
+      --color-neutral-400:   #9CA3AF;
       --color-neutral-300:   #D1D5DB;
       --color-neutral-200:   #E5E7EB;
       --color-neutral-100:   #F3F4F6;
       --color-neutral-50:    #F9FAFB;
       --color-white:         #FFFFFF;
+      --color-navy:          #2D2D2D;
 
       --font-family:         'Inter', system-ui, -apple-system, sans-serif;
       --font-size-xs:        0.75rem;   /* 12px */
@@ -385,7 +387,7 @@
     }
     .form-input:focus, .form-select:focus, .form-textarea:focus {
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(27,79,216,.15);
+      box-shadow: 0 0 0 3px rgba(227,0,27,.15);
     }
     .form-input.error { border-color: var(--color-error); }
     .form-error-msg { font-size: var(--font-size-xs); color: var(--color-error); }
@@ -480,6 +482,168 @@
     tbody tr:last-child td { border-bottom: none; }
     tbody tr:hover { background: var(--color-neutral-50); }
 
+    /* ─── NAVIGATION COMPONENTS ────────────────────────────────── */
+    .nav-demo-wrap { display: flex; flex-direction: column; gap: var(--spacing-8); }
+
+    /* Top nav bar */
+    .app-nav {
+      background: var(--color-nav-bg);
+      display: flex; align-items: center;
+      padding: 0 var(--spacing-6);
+      height: 48px;
+      gap: var(--spacing-6);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+    .app-nav-brand {
+      display: flex; align-items: center; gap: var(--spacing-2);
+      flex-shrink: 0;
+    }
+    .app-nav-brand-icon {
+      width: 28px; height: 28px; border-radius: var(--radius-full);
+      background: var(--color-primary);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 12px; font-weight: var(--font-weight-bold);
+    }
+    .app-nav-brand-name {
+      color: #fff; font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold); letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .app-nav-links {
+      display: flex; align-items: center; gap: var(--spacing-1);
+      flex: 1;
+    }
+    .app-nav-link {
+      color: rgba(255,255,255,.75); font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      padding: var(--spacing-2) var(--spacing-3);
+      border-radius: var(--radius-md);
+      text-decoration: none; cursor: pointer;
+      transition: color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+    .app-nav-link:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .app-nav-link.active { color: #fff; background: var(--color-primary); }
+    .app-nav-actions {
+      display: flex; align-items: center; gap: var(--spacing-3); flex-shrink: 0;
+    }
+    .app-nav-icon-btn {
+      width: 32px; height: 32px; border-radius: var(--radius-full);
+      background: rgba(255,255,255,.1); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.8); font-size: 14px;
+      transition: background var(--transition);
+    }
+    .app-nav-icon-btn:hover { background: rgba(255,255,255,.2); }
+    .app-nav-cta {
+      background: var(--color-primary); color: #fff; border: none;
+      padding: var(--spacing-2) var(--spacing-4);
+      border-radius: var(--radius-md); font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold); cursor: pointer;
+      font-family: var(--font-family);
+      transition: background var(--transition);
+    }
+    .app-nav-cta:hover { background: var(--color-primary-dark); }
+
+    /* Dropdown menu */
+    .nav-dropdown-demo { position: relative; display: inline-block; }
+    .nav-dropdown-trigger {
+      display: inline-flex; align-items: center; gap: var(--spacing-2);
+      background: var(--color-nav-bg); color: #fff;
+      border: none; padding: var(--spacing-2) var(--spacing-4);
+      border-radius: var(--radius-md); font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium); cursor: pointer;
+      font-family: var(--font-family);
+    }
+    .nav-dropdown-trigger::after { content: ' ▾'; font-size: 10px; opacity: .7; }
+    .nav-dropdown {
+      position: static; /* static for style guide display */
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--color-neutral-200);
+      min-width: 200px;
+      overflow: hidden;
+      margin-top: var(--spacing-1);
+    }
+    .nav-dropdown-header {
+      background: var(--color-primary); color: #fff;
+      padding: var(--spacing-2) var(--spacing-4);
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .nav-dropdown-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--spacing-3) var(--spacing-4);
+      font-size: var(--font-size-sm); color: var(--color-neutral-700);
+      cursor: pointer; text-decoration: none;
+      border-bottom: 1px solid var(--color-neutral-100);
+      transition: background var(--transition), color var(--transition);
+    }
+    .nav-dropdown-item:last-child { border-bottom: none; }
+    .nav-dropdown-item:hover { background: var(--color-primary-light); color: var(--color-primary); }
+    .nav-dropdown-item.active { background: var(--color-primary-light); color: var(--color-primary); font-weight: var(--font-weight-semibold); }
+    .nav-dropdown-item-arrow { font-size: 10px; color: var(--color-neutral-400); }
+
+    /* Breadcrumb */
+    .breadcrumb { display: flex; align-items: center; gap: var(--spacing-2); flex-wrap: wrap; }
+    .breadcrumb-item {
+      font-size: var(--font-size-sm); color: var(--color-neutral-500);
+      text-decoration: none; cursor: pointer;
+    }
+    .breadcrumb-item:hover { color: var(--color-primary); }
+    .breadcrumb-item.current { color: var(--color-neutral-900); font-weight: var(--font-weight-medium); }
+    .breadcrumb-sep { color: var(--color-neutral-300); font-size: var(--font-size-xs); }
+
+    /* Tab nav */
+    .tab-nav { display: flex; border-bottom: 2px solid var(--color-neutral-200); }
+    .tab-nav-item {
+      padding: var(--spacing-3) var(--spacing-5);
+      font-size: var(--font-size-sm); font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-500); cursor: pointer;
+      border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .tab-nav-item:hover { color: var(--color-neutral-700); }
+    .tab-nav-item.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+    /* Filter panel */
+    .filter-panel {
+      background: var(--color-white); border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      width: 200px; overflow: hidden;
+    }
+    .filter-panel-header {
+      background: var(--color-primary); color: #fff;
+      padding: var(--spacing-3) var(--spacing-4);
+      font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold);
+    }
+    .filter-panel-body { padding: var(--spacing-3) var(--spacing-4); }
+    .filter-checkbox-item {
+      display: flex; align-items: center; gap: var(--spacing-2);
+      padding: var(--spacing-2) 0;
+      font-size: var(--font-size-sm); color: var(--color-neutral-700); cursor: pointer;
+    }
+    .filter-checkbox {
+      width: 14px; height: 14px; accent-color: var(--color-primary);
+    }
+    .filter-panel-footer {
+      padding: var(--spacing-3) var(--spacing-4);
+      border-top: 1px solid var(--color-neutral-100);
+      display: flex; justify-content: space-between;
+    }
+    .filter-btn-apply {
+      background: var(--color-primary); color: #fff; border: none;
+      padding: var(--spacing-1) var(--spacing-4); border-radius: var(--radius-full);
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+      cursor: pointer; font-family: var(--font-family);
+    }
+    .filter-btn-reset {
+      background: transparent; color: var(--color-neutral-500); border: none;
+      font-size: var(--font-size-xs); cursor: pointer; font-family: var(--font-family);
+    }
+
     /* ─── FOOTER ────────────────────────────────────────────────── */
     .sg-footer {
       background: var(--color-navy);
@@ -501,7 +665,7 @@
 
 <!-- ─── HEADER ─────────────────────────────────────────────────── -->
 <header class="sg-header">
-  <div class="badge">⚠ Mock Data — Update with Figma tokens</div>
+  <div class="badge">Navigation tokens from Figma — More sections coming</div>
   <h1>Brand Style Guide</h1>
   <p>A living reference for building on-brand applications — includes an AI starter prompt for your team.</p>
 </header>
@@ -510,6 +674,7 @@
 <nav class="sg-nav">
   <a href="#starter-prompt">AI Starter Prompt</a>
   <a href="#colors">Colors</a>
+  <a href="#navigation">Navigation</a>
   <a href="#typography">Typography</a>
   <a href="#spacing">Spacing</a>
   <a href="#radius">Border Radius</a>
@@ -543,12 +708,12 @@ Tone: Professional, clear, approachable. Avoid jargon.
 Design philosophy: Clean, spacious, accessible.
 
 ─── COLOR PALETTE ─────────────────────────────────────────────
-Primary blue:       #1B4FD8   (main CTAs, links, key UI)
-Primary dark:       #0F3399   (hover states)
-Primary light:      #EBF0FF   (backgrounds, chips)
-Secondary:          #00B4D8   (accents, highlights)
-Accent / Warning:   #F59E0B
-Navy (dark bg):     #0A1628   (headers, footers)
+Primary red:        #E3001B   (main CTAs, active states, brand)
+Primary dark:       #B50016   (hover states)
+Primary light:      #FFEAED   (backgrounds, chips, highlights)
+Secondary:          #FF4D63   (accents)
+Nav background:     #3D3D3D   (top navigation bar, charcoal)
+Dark surface:       #2D2D2D   (headers, footers, overlays)
 
 Semantic colours:
   Success  #22C55E  |  Warning  #F59E0B  |  Error  #EF4444  |  Info  #3B82F6
@@ -589,9 +754,42 @@ Base unit: 4px
   md  0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06)
   lg  0 10px 15px rgba(0,0,0,.08), 0 4px 6px rgba(0,0,0,.05)
 
+─── NAVIGATION PATTERNS (from Figma: Menu Elements) ───────────
+Top nav bar:
+  Background: #3D3D3D (charcoal)
+  Brand logo: red circle icon + uppercase bold brand name in white
+  Nav links: rgba(255,255,255,.75), hover: white + rgba(255,255,255,.1) bg
+  Active link: white text + #E3001B bg pill
+  Icon buttons: 32px circle, rgba(255,255,255,.1) bg, hover .2
+  CTA button: #E3001B bg, white text, md border-radius
+  Height: 48px
+
+Dropdown menus:
+  Header bar: #E3001B bg, white text, xs uppercase semibold
+  Items: white bg, sm text neutral-700, 1px neutral-100 dividers
+  Hover: primary-light bg + primary text
+  Active: primary-light bg + primary text + semibold
+  Min-width: 200px, border-radius lg, shadow-lg
+
+Filter panels:
+  Header: #E3001B bg, white text
+  Checkboxes: accent-color primary red
+  Apply button: #E3001B bg, white text, border-radius full (pill shape)
+  Reset: plain text, neutral-500
+
+Breadcrumb:
+  Items: neutral-500 text, hover primary
+  Current: neutral-900, medium weight
+  Separator: › (›), neutral-300
+
+Tab navigation:
+  Active: primary text + 2px bottom border primary
+  Inactive: neutral-500, hover neutral-700
+  Border: 2px solid neutral-200 bottom
+
 ─── COMPONENT RULES ───────────────────────────────────────────
 Buttons:
-  Primary   – bg #1B4FD8, white text, hover #0F3399
+  Primary   – bg #E3001B, white text, hover #B50016
   Secondary – transparent bg, primary border & text, hover primary-light bg
   Ghost     – transparent bg, neutral-300 border, neutral-700 text
   Danger    – bg #EF4444, white text
@@ -601,7 +799,7 @@ Buttons:
 
 Inputs & Forms:
   Border: 1.5px solid neutral-300
-  Focus: border primary + box-shadow 0 0 0 3px rgba(27,79,216,.15)
+  Focus: border primary + box-shadow 0 0 0 3px rgba(227,0,27,.15)
   Error: border #EF4444, show error message in xs red text below
   Labels: Semibold 600, sm size, neutral-700, above the input
   Radius: md (6px)
@@ -656,48 +854,48 @@ Ask the brand team before deviating from any token above.</pre>
   <section id="colors" class="sg-section">
     <div class="sg-section-header">
       <h2>Color Palette</h2>
-      <span>⚠ placeholder values</span>
+      <span>Navigation palette confirmed — full palette pending</span>
     </div>
 
     <p style="font-size:var(--font-size-sm);color:var(--color-neutral-500);margin-bottom:var(--spacing-6);">Brand &amp; semantic colours</p>
     <div class="color-grid">
       <div class="color-swatch">
-        <div class="color-swatch-preview" style="background:#1B4FD8"></div>
+        <div class="color-swatch-preview" style="background:#E3001B"></div>
         <div class="color-swatch-info">
-          <div class="color-swatch-name">Primary</div>
-          <div class="color-swatch-hex">#1B4FD8</div>
+          <div class="color-swatch-name">Primary Red</div>
+          <div class="color-swatch-hex">#E3001B</div>
           <div class="color-swatch-var">--color-primary</div>
         </div>
       </div>
       <div class="color-swatch">
-        <div class="color-swatch-preview" style="background:#0F3399"></div>
+        <div class="color-swatch-preview" style="background:#B50016"></div>
         <div class="color-swatch-info">
           <div class="color-swatch-name">Primary Dark</div>
-          <div class="color-swatch-hex">#0F3399</div>
+          <div class="color-swatch-hex">#B50016</div>
           <div class="color-swatch-var">--color-primary-dark</div>
         </div>
       </div>
       <div class="color-swatch">
-        <div class="color-swatch-preview" style="background:#EBF0FF;border-bottom:1px solid #D1D5DB"></div>
+        <div class="color-swatch-preview" style="background:#FFEAED;border-bottom:1px solid #D1D5DB"></div>
         <div class="color-swatch-info">
           <div class="color-swatch-name">Primary Light</div>
-          <div class="color-swatch-hex">#EBF0FF</div>
+          <div class="color-swatch-hex">#FFEAED</div>
           <div class="color-swatch-var">--color-primary-light</div>
         </div>
       </div>
       <div class="color-swatch">
-        <div class="color-swatch-preview" style="background:#00B4D8"></div>
+        <div class="color-swatch-preview" style="background:#3D3D3D"></div>
         <div class="color-swatch-info">
-          <div class="color-swatch-name">Secondary</div>
-          <div class="color-swatch-hex">#00B4D8</div>
-          <div class="color-swatch-var">--color-secondary</div>
+          <div class="color-swatch-name">Nav Charcoal</div>
+          <div class="color-swatch-hex">#3D3D3D</div>
+          <div class="color-swatch-var">--color-nav-bg</div>
         </div>
       </div>
       <div class="color-swatch">
-        <div class="color-swatch-preview" style="background:#0A1628"></div>
+        <div class="color-swatch-preview" style="background:#2D2D2D"></div>
         <div class="color-swatch-info">
-          <div class="color-swatch-name">Navy</div>
-          <div class="color-swatch-hex">#0A1628</div>
+          <div class="color-swatch-name">Dark Surface</div>
+          <div class="color-swatch-hex">#2D2D2D</div>
           <div class="color-swatch-var">--color-navy</div>
         </div>
       </div>
@@ -737,6 +935,98 @@ Ask the brand team before deviating from any token above.</pre>
       <div class="color-swatch"><div class="color-swatch-preview" style="background:#374151"></div><div class="color-swatch-info"><div class="color-swatch-name">Neutral 700</div><div class="color-swatch-hex">#374151</div></div></div>
       <div class="color-swatch"><div class="color-swatch-preview" style="background:#1F2937"></div><div class="color-swatch-info"><div class="color-swatch-name">Neutral 800</div><div class="color-swatch-hex">#1F2937</div></div></div>
       <div class="color-swatch"><div class="color-swatch-preview" style="background:#111827"></div><div class="color-swatch-info"><div class="color-swatch-name">Neutral 900</div><div class="color-swatch-hex">#111827</div></div></div>
+    </div>
+  </section>
+
+  <!-- ── NAVIGATION ────────────────────────────────────────────── -->
+  <section id="navigation" class="sg-section">
+    <div class="sg-section-header">
+      <h2>Navigation</h2>
+      <span>Top bar · Dropdowns · Tabs · Filters · Breadcrumbs</span>
+    </div>
+
+    <div class="nav-demo-wrap">
+
+      <!-- Top nav bar -->
+      <div>
+        <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-neutral-500);margin-bottom:var(--spacing-3);">Primary Navigation Bar</p>
+        <nav class="app-nav">
+          <div class="app-nav-brand">
+            <div class="app-nav-brand-icon">A</div>
+            <span class="app-nav-brand-name">ACCESS</span>
+          </div>
+          <div class="app-nav-links">
+            <a class="app-nav-link active">Products</a>
+            <a class="app-nav-link">Solutions</a>
+            <a class="app-nav-link">Resources</a>
+            <a class="app-nav-link">Careers</a>
+            <a class="app-nav-link">Contact</a>
+          </div>
+          <div class="app-nav-actions">
+            <button class="app-nav-icon-btn">&#9881;</button>
+            <button class="app-nav-icon-btn">&#128276;</button>
+            <button class="app-nav-icon-btn">&#128100;</button>
+            <button class="app-nav-cta">Get Started</button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Dropdowns + Filter panel side by side -->
+      <div class="two-col" style="align-items:flex-start;">
+        <div>
+          <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-neutral-500);margin-bottom:var(--spacing-3);">Dropdown Menu</p>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-header">Products</div>
+            <a class="nav-dropdown-item active">Lorem ipsum <span class="nav-dropdown-item-arrow">&#9656;</span></a>
+            <a class="nav-dropdown-item">Label item <span class="nav-dropdown-item-arrow">&#9656;</span></a>
+            <a class="nav-dropdown-item">Lorem ipsum</a>
+            <a class="nav-dropdown-item">Label item</a>
+            <a class="nav-dropdown-item">Lorem ipsum</a>
+            <a class="nav-dropdown-item" style="color:var(--color-primary);font-weight:600;">&#43; Add new item</a>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-neutral-500);margin-bottom:var(--spacing-3);">Filter Panel</p>
+          <div class="filter-panel">
+            <div class="filter-panel-header">Filter by</div>
+            <div class="filter-panel-body">
+              <label class="filter-checkbox-item"><input type="checkbox" class="filter-checkbox" checked> Label item 1</label>
+              <label class="filter-checkbox-item"><input type="checkbox" class="filter-checkbox" checked> Label item 2</label>
+              <label class="filter-checkbox-item"><input type="checkbox" class="filter-checkbox"> Label item 3</label>
+              <label class="filter-checkbox-item"><input type="checkbox" class="filter-checkbox"> Label item 4</label>
+              <label class="filter-checkbox-item"><input type="checkbox" class="filter-checkbox"> Label item 5</label>
+            </div>
+            <div class="filter-panel-footer">
+              <button class="filter-btn-reset">Reset</button>
+              <button class="filter-btn-apply">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breadcrumb & Tabs -->
+      <div>
+        <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-neutral-500);margin-bottom:var(--spacing-3);">Breadcrumb</p>
+        <nav class="breadcrumb">
+          <a class="breadcrumb-item">Home</a>
+          <span class="breadcrumb-sep">&#8250;</span>
+          <a class="breadcrumb-item">Products</a>
+          <span class="breadcrumb-sep">&#8250;</span>
+          <span class="breadcrumb-item current">Product Detail</span>
+        </nav>
+      </div>
+
+      <div>
+        <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-neutral-500);margin-bottom:var(--spacing-3);">Tab Navigation</p>
+        <nav class="tab-nav">
+          <div class="tab-nav-item active">Products</div>
+          <div class="tab-nav-item">Solutions</div>
+          <div class="tab-nav-item">Resources</div>
+          <div class="tab-nav-item">Careers</div>
+        </nav>
+      </div>
+
     </div>
   </section>
 
@@ -781,7 +1071,7 @@ Ask the brand team before deviating from any token above.</pre>
     </div>
     <div class="type-row">
       <div class="type-meta"><div class="type-label">Eyebrow / XS</div><div class="type-specs">12px · Semibold · uppercase · 0.08em</div></div>
-      <div style="font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#1B4FD8">Section Category</div>
+      <div style="font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#E3001B">Section Category</div>
     </div>
     <div class="type-row">
       <div class="type-meta"><div class="type-label">Caption / XS</div><div class="type-specs">12px · Regular 400 · neutral-500</div></div>
@@ -926,7 +1216,7 @@ Ask the brand team before deviating from any token above.</pre>
         </div>
       </div>
       <div class="card">
-        <div class="card-img" style="background:linear-gradient(135deg,#0A1628 0%,#1B4FD8 100%)"></div>
+        <div class="card-img" style="background:linear-gradient(135deg,#2D2D2D 0%,#E3001B 100%)"></div>
         <div class="card-body">
           <div class="card-eyebrow">Feature</div>
           <div class="card-title">Automated workflows</div>
@@ -938,7 +1228,7 @@ Ask the brand team before deviating from any token above.</pre>
         </div>
       </div>
       <div class="card">
-        <div class="card-img" style="background:linear-gradient(135deg,#00B4D8 0%,#1B4FD8 100%)"></div>
+        <div class="card-img" style="background:linear-gradient(135deg,#FF4D63 0%,#E3001B 100%)"></div>
         <div class="card-body">
           <div class="card-eyebrow">Guide</div>
           <div class="card-title">Onboarding your team</div>
